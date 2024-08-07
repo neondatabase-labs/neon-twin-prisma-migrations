@@ -1,0 +1,21 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("PROD_DATABASE_URL")
+}
+
+model migrations {
+  migration_id   Int      @id @default(autoincrement())
+  migration_name String   @db.VarChar(255)
+  applied_at     DateTime @default(now()) @db.Timestamp(6)
+  status         String   @db.VarChar(50)
+  environment    String   @db.VarChar(50)
+}
+
+model users {
+  id         Int     @id @default(autoincrement())
+  first_name String  @db.VarChar(255)
+  last_name  String  @db.VarChar(255)
+  email      String  @unique @db.VarChar(255)
+  country    String  @db.VarChar(255)
+  flag       String? @db.VarChar(255)
+}
