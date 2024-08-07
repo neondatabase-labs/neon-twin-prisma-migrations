@@ -1,0 +1,24 @@
+name: Migrate to prod (prisma)
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+env:
+  PROD_DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }} # Production or primary database
+  PG_VERSION: '16'
+
+jobs:
+  pr-merged:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true # Ensure the PR was merged
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Prisma Migrate
+        run: |
+          npx prisma migrate deploy
