@@ -17,5 +17,5 @@ model users {
   last_name  String  @db.VarChar(255)
   email      String  @unique @db.VarChar(255)
   country    String  @db.VarChar(255)
-  flag       String? @db.VarChar(255)
+  flag       String? @db.VarChar(55)
 }
